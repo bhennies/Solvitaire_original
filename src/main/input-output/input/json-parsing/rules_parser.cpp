@@ -207,6 +207,14 @@ void rules_parser::modify_sol_rules(sol_rules& sr, Document& d) {
                 }
             }
 
+            if (d["tableau piles"].HasMember("four colour deal")) {
+                if (d["tableau piles"]["four colour deal"].IsBool()) {
+                    sr.four_colour_deal = d["tableau piles"]["four colour deal"].GetBool();
+                } else {
+                    json_helper::json_parse_err("[tableau piles][four colour deal] must be a boolean");
+                }
+            }
+
             string face_up_str;
             if (d["tableau piles"].HasMember("face up cards")) {
                 if (d["tableau piles"]["face up cards"].IsString()) {
@@ -345,6 +353,13 @@ void rules_parser::modify_sol_rules(sol_rules& sr, Document& d) {
                     sr.cells_pre_filled = static_cast<uint8_t>(d["cells"]["pre-filled"].GetInt());
                 } else {
                     json_helper::json_parse_err("[cells][pre-filled] must be an integer");
+                }
+            }
+            if (d["cells"].HasMember("four colour rule")) {
+                if (d["cells"]["four colour rule"].IsBool()) {
+                    sr.cells_four_colour_rule = d["cells"]["four colour rule"].GetBool();
+                } else {
+                    json_helper::json_parse_err("[cells][four colour rule] must be a boolean");
                 }
             }
         } else {
@@ -612,6 +627,9 @@ string rules_parser::rules_schema_json() {
         "diagonal deal": {
           "type": "boolean"
         },
+        "four colour deal": {
+          "type": "boolean"
+        },
         "move built group": {
           "type": "string",
           "enum": [
@@ -700,6 +718,9 @@ string rules_parser::rules_schema_json() {
         "pre-filled": {
           "type": "integer",
           "minimum": 0
+        },
+        "four colour rule": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false

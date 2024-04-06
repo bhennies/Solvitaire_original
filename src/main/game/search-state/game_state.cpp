@@ -256,6 +256,26 @@ game_state::game_state(const sol_rules& s_rules, int seed, streamliner_options s
         // Adds the randomly generated card to the tableau piles
         auto p = t % original_tableau_piles.size();
 
+        // If four-colour patience, place in pile according to its suit
+        if (rules.four_colour_deal) {
+            /*switch (c.get_suit())
+            {
+            case card::suit.Clubs:
+                p = 0;
+                break;
+            case card::suit.Spades:
+                p = 1;
+                break;
+            case card::suit.Hearts:
+                p = 2;
+                break;
+            case card::suit.Diamonds:
+                p = 3;
+                break;
+            }*/
+            p = c.get_suit();
+        }
+
         // If we are doing a diagonal deal, each row should have one fewer card.
         // Leftover cards are dealt normally in full rows.
         auto row_idx = t / original_tableau_piles.size();

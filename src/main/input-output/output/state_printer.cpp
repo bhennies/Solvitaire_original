@@ -102,28 +102,17 @@ void state_printer::print_piles(ostream& stream,
         }
         if (!empty_row || row_idx == 0) {
             // Loops through the current (non-empty) row, and outputs the values
-            // const auto len = pile_rs.size();
-            size_t idx = 0;
-            std::ostringstream os;
             for (const pile::ref pile_r : pile_rs) {
-                if (idx) {
-                    os << "\t";
-                }
-                ++idx;
                 const pile& p = gs.piles[pile_r];
                 if (p.size() > row_idx) {
-                    print_card(os, p[p.size() - 1 - row_idx]);
+                    print_card(stream, p[p.size() - 1 - row_idx]);
                 } else if (row_idx == 0) {
-                    os << "[]";
+                    stream << "[]";
                 }
-            }
-            auto line = os.str();
-            while (line.length() && line[line.length()-1] == '\t')
-            {
-                line.pop_back();
+                stream << "\t";
             }
 
-            stream << line << "\n";
+            stream << "\n";
             row_idx++;
         }
     }
@@ -153,17 +142,13 @@ void state_printer::print_top_of_piles(ostream& stream,
                                        const game_state& gs) {
     vector<pile::ref> top(vp);
 
-    const auto len = top.size();
-    size_t idx = 0;
     for (pile::ref p : top) {
         if (gs.piles[p].empty()) {
             stream << "[]";
         } else {
             print_card(stream, gs.piles[p].top_card());
         }
-        if (++idx != len) {
-            stream << "\t";
-        }
+        stream << "\t";
     }
     stream << "\n";
 }

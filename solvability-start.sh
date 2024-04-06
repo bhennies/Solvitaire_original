@@ -16,7 +16,7 @@ out=`mktemp $6-XXXXXZ`
 
 echo $out 
 
-time_command="/usr/bin/time -f \" %e, %U, %S, %M\""
+time_command="time -f \" %e, %U, %S, %M\""
 combine_command="sed -e 'H;\${x;s/\n/,/g;s/^,//;p;};d'"
 
 increment=1
@@ -30,7 +30,7 @@ echo "StartDate: " `date` >> "$out.experiment"
 
 echo "Attempted Seed, Outcome, Time Taken(ms), States Searched, Unique States Searched, Backtracks, Dominance Moves, States Removed From Cache, Final States In Cache, Final Buckets In Cache, Maximum Search Depth, Final Search Depth, real (time), user (time), sys (time) " >> "$out.experiment"
 
-cat $out | parallel --joblog $out.log --memfree $minramfree -j"$cores" "exec $time_command $sol_command --ra {} --class 2>&1 | $combine_command >> $out.csv"
+cat $out | parallel --joblog $out.log --memfree $minramfree -j"$cores" "exec $sol_command --ra {} --class 2>&1 | $combine_command >> $out.csv"
 
 echo "MainRunEndDate: " `date` >> "$out.experiment"
 

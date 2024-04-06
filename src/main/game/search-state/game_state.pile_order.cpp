@@ -21,7 +21,6 @@
 // Created by thecharlesblake on 07/06/18.
 //
 
-#include <algorithm>
 #include "game_state.h"
 
 using std::list;

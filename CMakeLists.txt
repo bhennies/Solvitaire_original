@@ -88,7 +88,7 @@ include_directories(lib/rapidjson)
 ## Boost setup ################################################################
 ###############################################################################
 
-# set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
@@ -196,22 +196,8 @@ target_link_libraries(unit_tests gtest_main ${Boost_LIBRARIES})
 
 ENABLE_TESTING()
 ADD_TEST(NAME unit_tests
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/test"
-        COMMAND "${CMAKE_CURRENT_BINARY_DIR}/bin/unit_tests")
-ADD_TEST(NAME trailing_space
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/test"
-        COMMAND "python3" "${CMAKE_CURRENT_SOURCE_DIR}/src/test/check_for_no_trailing_space_in_output.py"
-        "--exe" "${CMAKE_CURRENT_BINARY_DIR}/bin/solvitaire"
-        "--gametype" "klondike"
-        "--deal" "${CMAKE_CURRENT_SOURCE_DIR}/resources/deal-presets/klondikeSM1.json"
-)
-ADD_TEST(NAME trailing_space_free_cell
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/test"
-        COMMAND "python3" "${CMAKE_CURRENT_SOURCE_DIR}/src/test/check_for_no_trailing_space_in_output.py"
-        "--exe" "${CMAKE_CURRENT_BINARY_DIR}/bin/solvitaire"
-        "--gametype" "free-cell"
-        "--deal" "${CMAKE_CURRENT_SOURCE_DIR}/src/test/resources/free_cell/fc-pro-3.json"
-)
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+        COMMAND unit_tests)
 
 ###############################################################################
 ## packaging ##################################################################

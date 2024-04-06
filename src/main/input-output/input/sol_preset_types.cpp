@@ -44,6 +44,7 @@ map<string, string> sol_preset_types::mp = {
     "build policy": "any-suit",
     "spaces policy": "any",
     "diagonal deal": false,
+    "four colour deal": false,
     "move built group": "no",
     "move built group policy": "same-as-build",
     "face up cards": "all"
@@ -62,7 +63,8 @@ map<string, string> sol_preset_types::mp = {
   },
   "cells": {
     "count": 0,
-    "pre-filled": 0
+    "pre-filled": 0,
+    "four colour rule": false
   },
   "stock": {
     "size": 0,
@@ -87,6 +89,26 @@ map<string, string> sol_preset_types::mp = {
   },
   "max rank": 13,
   "two decks": false
+}
+)"
+
+        },
+        {
+                "four-colour-patience",
+
+                R"(
+{
+  "tableau piles": {
+    "count": 7,
+    "build policy": "red-black",
+    "four colour deal": true,
+    "move built group": "no"
+  },
+  "cells": {
+    "count": 4,
+    "four colour rule": true
+  }
+  
 }
 )"
 

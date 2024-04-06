@@ -98,8 +98,10 @@ struct sol_rules {
     bool foundations_removable;
     bool foundations_only_comp_piles;
     bool diagonal_deal;
+    bool four_colour_deal;
     uint8_t cells;
     uint8_t cells_pre_filled;
+    bool cells_four_colour_rule;
     uint8_t stock_size;
     stock_deal_type stock_deal_t;
     uint8_t stock_deal_count;

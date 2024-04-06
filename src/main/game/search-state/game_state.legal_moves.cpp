@@ -87,7 +87,15 @@ vector<move> game_state::get_legal_moves(move parent_move) {
     if (empty_cell != 255) {
         for (auto t : tableau_piles) {
             if (piles[t].empty() || parent_move.to == t) continue;
-            else moves.emplace_back(move::mtype::regular, t, empty_cell);
+            bool move_valid = true;
+            if (rules.cells_four_colour_rule) {
+                for (auto c: cells) {
+                    if (!piles[c].empty() && piles[c].top_card().get_suit() == piles[t].top_card().get_suit()) {
+                        move_valid = false;
+                    }
+                }
+            }
+            if (move_valid) moves.emplace_back(move::mtype::regular, t, empty_cell);
         }
 
         for (auto r : reserve)

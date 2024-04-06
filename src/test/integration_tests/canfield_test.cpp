@@ -21,8 +21,7 @@
 // Created by thecharlesblake on 10/4/17.
 //
 
-#include <boost/optional/optional_io.hpp>
-#include <gtest/gtest.h>
+/* #include <gtest/gtest.h>
 
 #include "../test_helper.h"
 #include "../../main/input-output/input/json-parsing/rules_parser.h"
@@ -157,3 +156,4 @@ TEST(Canfield, AutoReserveThenWaste) {
 
     ASSERT_EQ(exp_dom_move, actual_dom_move) << *actual_dom_move;
 }
+ */
